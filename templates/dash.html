@@ -129,8 +129,11 @@ display: none;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   transition: 0.3s;
   width: 40%;
+  min-height: 300;
+  min-width: 150;
   max-height: 600px;
   max-width: 300px;
+  float: left;
 
 }
 
@@ -143,23 +146,7 @@ display: none;
 }
 
 </style>
-   <!--  <script>
-    function hov(){
-        document.getElementById("loaderid").style.background-color = "";
 
-        $(".hover").hover(function(){
-            $(this).css("background-color", "#ddd");
-            }, function(){
-            $(this).css("background-color", "#1A535C");
-        });
-    }
-    </script> -->
-
-
-
-    <title></title>
-<!-- <div class="topnav">{{nav.my_navbar.render()}}</div>
- -->
 
 </head>
 
@@ -171,26 +158,38 @@ display: none;
         <a href="/dash" class="active">Dashboard</a>
         <a href="/" >Signout</a>
     </div>
-
-
-
+<!--     current sessions
+ -->
+  {%for i in range(0, slen)%}
     <div class="card" onclick="document.getElementById('id01').style.display='block'">
-  <img src="/static/add.jpg" alt="Avatar" style="width:100%">
-  <div class="cardcon" style="background-color: #4ECDC4:">
-    <h4><b>Create New Session</b></h4>
-    <p></p>
-  </div>
-</div>
+      <div class="cardcon" style="background-color: #4ECDC4:">
+        <h4><b>{{slist[i].strip()}}</b></h4>
+        <p></p>
+      </div>
+    </div>
+     {%endfor%}
 
-    <div id="id01" class="modal">
+<!-- add
+ -->
+    <div class="card" onclick="document.getElementById('id01').style.display='block'" >
+      <img src="/static/add.jpg" alt="Avatar" style="width:100%">
+      <div class="cardcon" style="background-color: #4ECDC4:">
+        <h4><b>Create New Session</b></h4>
+        <p></p>
+      </div>
+    </div>
+
+<!-- create sessions
+ -->
+      <div id="id01" class="modal">
         <form class="modal-content animate"  method="POST">
             <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
 
-        <div class="imgcontainer" style="align-items: center;">
+          <div class="imgcontainer" style="align-items: center;">
             <h1>Create a new Session</h1>
-        </div>
+          </div>
 
-        <div class="container">
+          <div class="container">
             <label for="name"><b>Name</b></label>
             <input type="text" placeholder="Session I" name="name"  for="name"required>
 
@@ -200,9 +199,9 @@ display: none;
             <label for="time"><b>time</b></label>
             <input type="time" placeholder="HH:MM" name="time" for="time"required>
             <div>
-                <button type="submit" name="action" value="create" id="btn2">Create</button>
+              <button type="submit" name="action" value="create">Create</button>
             </div>
-        </div>
+          </div>
         </form>
     </div>
     <script>
